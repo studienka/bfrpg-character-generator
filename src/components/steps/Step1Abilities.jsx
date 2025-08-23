@@ -19,7 +19,7 @@ export default function Step1Abilities({ next }) {
 	return (
 		<StepLayout
 			title="Step 1: Roll Your Ability Scores"
-			onNext={() => nwxt({ abilities: scores })}
+			onNext={() => next({ abilities: scores })}
 			nextDisabled={!scores}
 		>
 			{!scores ? (
