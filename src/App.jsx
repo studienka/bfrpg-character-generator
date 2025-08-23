@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import Step1Abilities from "./components/steps/Step1Abilities";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+	const [step, setStep] = useState(1);
+	const [character, setCharacter] = useState({});
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	const nextStep = (dataFromStep) => {
+		setCharacter(prev => ({ ...prev, ...dataFromStep }));
+		setStep(prev => prev + 1);
+	};
+
+	return (
+		<>
+			{step === 1 && <Step1Abilities next={nextStep} />}
+			{step > 1 && (
+				<div className="w-screen h-screen flex items-center justify-center">
+					<div className="text-center">
+						<h1 className="text-3x1 font-bold mb-4">Next steps coming...</h1>
+						<p className="mb-2">So far stored character data:</p>
+						<pre className="text-left inline-block p-4 border border-black rounded max-w-xl overflow-auto">
+							{JSON.stringify(character, null, 2)}
+						</pre>
+					</div>
+				</div>
+			)}
+		</>
+	);
+					
 }
-
-export default App
